@@ -1,0 +1,73 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+<h1>Class Performance Overview</h1>
+
+{% for class in class_data %}
+
+    <div style="border:1px solid #ccc; padding:15px; margin-bottom:25px;">
+
+        <h2>Class: {{ class.class_name }}</h2>
+
+        <p><strong>Total Students:</strong> {{ class.total_students }}</p>
+        <p><strong>Class Average:</strong> {{ class.class_average }}%</p>
+
+        {% if class.topper %}
+            <p>
+                <strong>Topper:</strong>
+                {{ class.topper.student.user.email }}
+                ({{ class.topper.percentage }}%)
+            </p>
+        {% endif %}
+
+        <!-- 🔒 RESULT LOCK SECTION (ADMIN ONLY) -->
+        {% if request.user.role == 'ADMIN' %}
+<div style="margin-top:15px; padding:10px; background:#f8f8f8;">
+    <h4>Lock / Unlock Result</h4>
+
+    <form method="POST" action="{% url 'marks:toggle_result_lock' %}">
+        {% csrf_token %}
+        <input type="hidden" name="class_name" value="{{ class.class_name }}">
+
+        <select name="exam_name" required>
+            <option value="">Select Exam</option>
+            {% for exam in class.exam_list %}
+                <option value="{{ exam }}">{{ exam }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit">Toggle Lock</button>
+    </form>
+</div>
+{% endif %}
+
+        <hr>
+
+        <h3>Ranking List</h3>
+
+        <table border="1" cellpadding="8" cellspacing="0">
+            <tr>
+                <th>Rank</th>
+                <th>Student</th>
+                <th>Percentage</th>
+                <th>Grade</th>
+            </tr>
+
+            {% for item in class.ranking_list %}
+            <tr>
+                <td>{{ item.rank }}</td>
+                <td>{{ item.student.user.email }}</td>
+                <td>{{ item.percentage }}%</td>
+                <td>{{ item.grade }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+
+{% empty %}
+    <p>No class data available.</p>
+{% endfor %}
+
+{% endblock %}

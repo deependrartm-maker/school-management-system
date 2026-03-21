@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body class="login-page">
+
+<div class="login-card">
+    <img src="{% static 'logo.jpg' %}" class="logo" alt="Logo">
+    <h2>Login</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit" class="login-btn">Login</button>
+        {% if error_msg %}
+        <div class="error-msg">{{ error_msg }}</div>
+        {% endif %}
+    </form>
+    <div class="login-footer">© 2026 School Management System</div>
+</div>
+
+</body>
+</html>

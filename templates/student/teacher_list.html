@@ -1,0 +1,66 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+
+<h2>Students</h2>
+
+<form method="get" style="margin-bottom: 15px;">
+    <input
+        type="text"
+        name="q"
+        placeholder="Search by admission no, class, section, email"
+        value="{{ query }}"
+    >
+    <button type="submit">Search</button>
+
+    {% if query %}
+        <a href="{% url 'teacher_student_list' %}">Clear</a>
+    {% endif %}
+</form>
+
+<table border="1" cellpadding="8" cellspacing="0" width="50%">
+    <thead>
+        <tr>
+            <th>Admission No</th>
+            <th>Class</th>
+            <th>Section</th>
+            <th>Date of Birth</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+        <tr>
+            <td>{{ student.admission_no }}</td>
+            <td>{{ student.class_name }}</td>
+            <td>{{ student.section }}</td>
+            <td>{{ student.date_of_birth }}</td>
+            <td>
+                <a href="{% url 'student_detail' student.id %}">View</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No students found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    {% if students.has_previous %}
+        <a href="?page=1{% if query %}&q={{ query }}{% endif %}">First</a>
+        <a href="?page={{ students.previous_page_number }}{% if query %}&q={{ query }}{% endif %}">Previous</a>
+    {% endif %}
+
+    <span>
+        Page {{ students.number }} of {{ students.paginator.num_pages }}
+    </span>
+
+    {% if students.has_next %}
+        <a href="?page={{ students.next_page_number }}{% if query %}&q={{ query }}{% endif %}">Next</a>
+        <a href="?page={{ students.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}">Last</a>
+    {% endif %}
+</div>
+
+{% endblock %}

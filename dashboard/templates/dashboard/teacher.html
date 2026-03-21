@@ -1,0 +1,40 @@
+{% extends 'dashboard/base.html' %}  <!-- MUST be first line -->
+
+{% block title %}Teacher Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h2 class="mb-4">Teacher Dashboard</h2>
+
+    <!-- Cards -->
+    <div class="cards">
+        <div class="card">Total Students: 0</div>
+        <div class="card">Classes Assigned: 0</div>
+        <div class="card">Attendance Today: 0</div>
+        <div class="card">Pending Homework: 0</div>
+    </div>
+
+    <!-- Charts -->
+    <div class="charts">
+        <div class="chart">Attendance Trend Placeholder</div>
+        <div class="chart">Marks Distribution Placeholder</div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="recent-activity">
+        <h4>Recent Activity</h4>
+        <ul>
+            <li>Marked attendance for Class 10A</li>
+            <li>Assigned homework for Class 9B</li>
+            <li>Updated marks for Science</li>
+        </ul>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+        <a href="{% url 'marks:enter_marks' %}">Enter Marks</a>
+        <a href="#" class="btn">Mark Attendance</a>
+        <a href="#" class="btn">Assign Homework</a>
+    </div>
+</div>
+{% endblock %}

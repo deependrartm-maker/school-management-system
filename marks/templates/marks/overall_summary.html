@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Overall Result Summary</title>
+    <style>
+        body { font-family: Arial; padding: 40px; }
+        .card {
+            border: 1px solid #ccc;
+            padding: 30px;
+            width: 400px;
+        }
+        h2 { margin-bottom: 20px; }
+        .value { font-size: 18px; margin: 10px 0; }
+        .highlight { font-weight: bold; font-size: 22px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>{{ student.user.email }}</h2>
+    <div class="value">Total Obtained: {{ total_obtained }}</div>
+    <div class="value">Total Maximum: {{ total_max }}</div>
+    <div class="value highlight">Overall %: {{ percentage }}%</div>
+    <div class="value highlight">Grade: {{ grade }}</div>
+    <p><strong>Result:</strong> {{ result_status }}</p>
+    <p><strong>Division:</strong> {{ division }}</p>
+    <p><strong>Rank:</strong> {{ rank }}</p>
+</div>
+
+<hr>
+
+<a href="{% url 'professional_print' student.id exam_name %}" 
+   style="padding:10px 20px; background:#007bff; color:white; text-decoration:none; border-radius:5px;">
+   Download Professional Marksheet
+</a>
+
+</body>
+</html>

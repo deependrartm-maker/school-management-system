@@ -1,0 +1,112 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+
+<div class="container mt-4">
+
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white rounded-top-4">
+            <h4 class="mb-0">➕ Add New Student</h4>
+        </div>
+
+        <div class="card-body p-4">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <h5 class="text-secondary mb-3">📘 Student Information</h5>
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" name="full_name" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Admission Number</label>
+                        <input type="text" name="admission_no" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Class</label>
+                        <select name="student_class" class="form-select" required>
+                            <option value="">Select</option>
+                            {% for c in class_choices %}
+                                <option value="{{ c }}">{{ c }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <label class="form-label">Section</label>
+                        <select name="student_section" class="form-select" required>
+                            <option value="">Select</option>
+                            {% for s in section_choices %}
+                                <option value="{{ s }}">{{ s }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Date of Birth</label>
+                        <input type="date" name="dob" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Upload Photo</label>
+                        <input type="file" name="photo" class="form-control">
+                    </div>
+
+                </div>
+
+                <hr class="my-4">
+
+                <h5 class="text-secondary mb-3">👨‍👩‍👧 Parent / Guardian Details</h5>
+
+                <div class="row g-3">
+
+                    <div class="col-md-6">
+                        <label class="form-label">Parent Name</label>
+                        <input type="text" name="parent_name" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Parent Contact</label>
+                        <input type="text" name="parent_contact" class="form-control">
+                    </div>
+
+                    <div class="col-12">
+                        <label class="form-label">Address</label>
+                        <textarea name="address" rows="3" class="form-control"></textarea>
+                    </div>
+
+                </div>
+
+                <div class="text-end mt-4">
+                    <button type="submit" class="btn btn-success px-4">
+                        💾 Save Student
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

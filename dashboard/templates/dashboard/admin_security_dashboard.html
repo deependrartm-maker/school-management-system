@@ -1,0 +1,44 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+
+<h2>🔐 Admin Security Dashboard</h2>
+
+<hr>
+
+<div>
+    <h3>📊 Failed Logins Today</h3>
+    <p><strong>{{ failed_today }}</strong></p>
+</div>
+
+<hr>
+
+<div>
+    <h3>🌍 Top Attacking IP</h3>
+    {% if top_ip %}
+        <p>IP: {{ top_ip.ip_address }}</p>
+        <p>Attempts: {{ top_ip.count }}</p>
+    {% else %}
+        <p>No failed logins yet.</p>
+    {% endif %}
+</div>
+
+<hr>
+
+<div>
+    <h3>🚫 Failed Attempts (Last 15 Minutes)</h3>
+    <p><strong>{{ recent_failed }}</strong></p>
+</div>
+
+<hr>
+
+<div>
+    <h3>📈 Security Status</h3>
+    {% if recent_failed >= 5 %}
+        <p style="color:red;">⚠️ Possible brute-force attack in progress!</p>
+    {% else %}
+        <p style="color:green;">System Stable</p>
+    {% endif %}
+</div>
+
+{% endblock %}

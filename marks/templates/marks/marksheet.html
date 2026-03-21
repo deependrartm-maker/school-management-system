@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Marksheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
+        .header {
+            text-align: center;
+        }
+        .student-info {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: center;
+        }
+        .print-btn {
+            margin-top: 20px;
+        }
+        @media print {
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h2>SCHOOL MANAGEMENT SYSTEM</h2>
+    <h3>Student Marksheet</h3>
+</div>
+
+<div class="student-info">
+    <p><strong>Name:</strong> {{ student.user.email }}</p>
+    <p><strong>Admission No:</strong> {{ student.admission_no }}</p>
+    <p><strong>Class:</strong> {{ student.class_name }}</p>
+    <p><strong>Section:</strong> {{ student.section }}</p>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Subject</th>
+            <th>Exam</th>
+            <th>Marks Obtained</th>
+            <th>Total Marks</th>
+            <th>Percentage</th>
+            <th>Grade</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in marks_data %}
+        <tr>
+            <td>{{ item.subject }}</td>
+            <td>{{ item.exam_name }}</td>
+            <td>{{ item.marks_obtained }}</td>
+            <td>{{ item.total_marks }}</td>
+            <td>{{ item.percentage }}%</td>
+            <td>{{ item.grade }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="print-btn">
+    <button onclick="window.print()">Print Marksheet</button>
+</div>
+
+</body>
+</html>

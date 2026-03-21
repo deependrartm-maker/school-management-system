@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Dashboard{% endblock %}</title>
+
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h5 class="text-center mb-4">School Management</h5>
+
+    {% if request.user.role == 'admin' %}
+        <a href="{% url 'admin_dashboard' %}">Dashboard</a>
+        <a href="{% url 'enter_marks' %}">Enter Marks</a>
+        <a href="{% url 'marks:toggle_result_lock' %}">Result Lock</a>
+        <a href="{% url 'generate_promotion' %}">Promotion</a>
+        <a href="{% url 'merit_list' %}">Merit List</a>
+        <a href="{% url 'admin_security_dashboard' %}">Security</a>
+        <a href="{% url 'admin_blocked_ips' %}">Blocked IPs</a>
+    {% elif request.user.role == 'teacher' %}
+        <a href="{% url 'teacher_dashboard' %}">Dashboard</a>
+        <a href="#">Enter Marks</a>
+        <a href="#">Mark Attendance</a>
+        <a href="#">Assign Homework</a>
+    {% elif request.user.role == 'student' %}
+        <a href="{% url 'student_dashboard' %}">Dashboard</a>
+        <a href="#">View Result</a>
+        <a href="#">Download Marksheet</a>
+    {% elif request.user.role == 'parent' %}
+        <a href="{% url 'parent_dashboard' %}">Dashboard</a>
+        <a href="#">View Result</a>
+        <a href="#">Download Marksheet</a>
+        <a href="#">Contact Teacher</a>
+    {% endif %}
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar d-flex justify-content-between">
+    <div>
+        Welcome, {{ request.user.email }} ({{ request.user.role|title }})
+    </div>
+    <div>
+        <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

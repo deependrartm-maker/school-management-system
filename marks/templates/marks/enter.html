@@ -1,0 +1,131 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2>Enter Marks</h2>
+
+    <!-- ================= SELECTION FORM ================= -->
+    {% if not students %}
+    <form method="get" class="card p-4 shadow-sm">
+        <div class="row">
+
+            <!-- Exam -->
+            <div class="col-md-4">
+                <label>Exam</label>
+                <select name="exam" class="form-control" required>
+                    <option value="">Select Exam</option>
+                    <option value="Unit Test 1">Unit Test 1</option>
+                    <option value="sem1">sem1</option>
+                    <option value="Unit Test 2">Unit Test 2</option>
+                    <option value="sem2">sem2</option>
+                </select>
+            </div>
+
+            <!-- Class -->
+            <div class="col-md-4">
+                <label>Class</label>
+                <select name="class_name" class="form-control" required>
+                    <option value="">Select Class</option>
+                    <option>Nursery</option>
+                    <option>LKG</option>
+                    <option>UKG</option>
+                    <option>I</option>
+                    <option>II</option>
+                    <option>III</option>
+                    <option>IV</option>
+                    <option>V</option>
+                    <option>VI</option>
+                    <option>VII</option>
+                    <option>VIII</option>
+                    <option>IX</option>
+                    <option disabled>X (Board)</option>
+                    <option>XI</option>
+                    <option disabled>XII (Board)</option>
+                </select>
+            </div>
+
+            <!-- Section -->
+            <div class="col-md-4">
+                <label>Section</label>
+                <select name="section" class="form-control" required>
+                    <option value="">Select Section</option>
+                    <option>Jasmine</option>
+                    <option>Lotus</option>
+                    <option>Lily</option>
+                    <option>Rose</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-4 text-center">
+            <button type="submit" class="btn btn-primary px-5">
+                Load Students
+            </button>
+        </div>
+    </form>
+    {% endif %}
+
+
+    <!-- ================= STUDENT LIST ================= -->
+    {% if students %}
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="card mt-4 shadow-sm">
+            <div class="card-header bg-dark text-white">
+                Enter Marks for {{ selected_exam }}
+            </div>
+
+            <div class="card-body">
+                <table class="table table-bordered align-middle">
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Student Name</th>
+                            <th>Project (20)</th>
+                            <th>Theory (80)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for student in students %}
+                        <tr>
+                            <td>
+                                <img src="{{ student.photo.url }}" 
+                                     width="50" height="50"
+                                     style="border-radius:50%;">
+                            </td>
+                            <td>{{ student.name }}</td>
+
+                            <td>
+                                <input type="number"
+                                       name="project_{{ student.id }}"
+                                       min="5" max="20"
+                                       class="form-control"
+                                       required>
+                            </td>
+
+                            <td>
+                                <input type="number"
+                                       name="theory_{{ student.id }}"
+                                       min="10" max="80"
+                                       class="form-control"
+                                       required>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-success px-5">
+                        Save Marks
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+    {% endif %}
+
+</div>
+
+{% endblock %}

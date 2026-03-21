@@ -1,0 +1,29 @@
+{% extends "dashboard/admin.html" %}
+
+{% block content %}
+<h2>Blocked IP Management</h2>
+<table border="1" cellpadding="8">
+    <tr>
+        <th>IP Address</th>
+        <th>Blocked At</th>
+        <th>Unblock At</th>
+        <th>Remaining Time (min)</th>
+        <th>Action</th>
+    </tr>
+    {% for ip in blocked_ips %}
+    <tr>
+        <td>{{ ip.ip_address }}</td>
+        <td>{{ ip.blocked_at }}</td>
+        <td>{{ ip.unblock_at }}</td>
+        <td>{{ ip.remaining_time|floatformat:0|divisibleby:60 }}</td>
+        <td>
+            <a href="{% url 'unblock_ip' ip.id %}">Unblock</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="5">No blocked IPs</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

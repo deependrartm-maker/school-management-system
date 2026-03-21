@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Verification</title>
+    <style>
+        body { font-family: Arial; background:#f4f4f4; padding:30px; }
+        .card { background:white; padding:30px; border-radius:8px; }
+        .valid { background:#d4edda; color:#155724; padding:10px; margin-bottom:20px; }
+        .invalid { background:#f8d7da; color:#721c24; padding:10px; margin-bottom:20px; }
+        table { width:100%; border-collapse: collapse; }
+        th, td { border:1px solid #ccc; padding:8px; text-align:center; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+
+<img src="{% static 'logo.jpg' %}" height="80">
+
+<h2>Digital Marksheet Verification</h2>
+
+{% if valid %}
+
+<div class="valid">
+    ✔ VERIFIED & AUTHENTIC DOCUMENT
+</div>
+
+<p><strong>Admission No:</strong> {{ student.admission_no }}</p>
+<p><strong>Class:</strong> {{ student.class_name }}</p>
+<p><strong>Exam:</strong> {{ exam_name }}</p>
+
+<table>
+<tr>
+<th>Subject</th>
+<th>Marks</th>
+<th>Total</th>
+</tr>
+
+{% for m in marks %}
+<tr>
+<td>{{ m.subject.name }}</td>
+<td>{{ m.marks_obtained }}</td>
+<td>{{ m.total_marks }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<h3>Total: {{ total_obtained }} / {{ total_max }}</h3>
+<h3>Percentage: {{ percentage }}%</h3>
+<h3>Grade: {{ grade }}</h3>
+
+{% else %}
+
+<div class="invalid">
+    ⚠ INVALID OR TAMPERED DOCUMENT
+</div>
+
+<p>{{ error }}</p>
+
+{% endif %}
+
+</div>
+</body>
+</html>

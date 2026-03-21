@@ -1,0 +1,37 @@
+{% extends "dashboard/base.html" %}
+{% block content %}
+
+<h2>Marks – {{ student.admission_no }}</h2>
+
+<h2>Marks for {{ student.user.email }}</h2>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Subject</th>
+        <th>Exam</th>
+        <th>Marks</th>
+        <th>Total</th>
+        <th>Percentage</th>
+        <th>Grade</th>
+    </tr>
+
+    {% for mark in marks_data %}
+    <tr>
+        <td>{{ mark.subject }}</td>
+        <td>{{ mark.exam }}</td>
+        <td>{{ mark.marks }}</td>
+        <td>{{ mark.total }}</td>
+        <td>{{ mark.percentage }}%</td>
+        <td>{{ mark.grade }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td colspan="6">No marks available</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'generate_marksheet_pdf' student.id %}">
+    Download PDF
+</a>
+
+{% endblock %}

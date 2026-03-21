@@ -1,0 +1,54 @@
+{% extends "dashboard/admin.html" %}
+{% block content %}
+
+<h2>Class Merit List</h2>
+
+<form method="get">
+    <select name="class_name">
+        <option value="">Select Class</option>
+        {% for c in classes %}
+        <option value="{{ c }}" {% if selected_class == c %}selected{% endif %}>{{ c }}</option>
+        {% endfor %}
+    </select>
+
+    <select name="exam_name">
+        <option value="">Select Exam</option>
+        {% for e in exams %}
+        <option value="{{ e }}" {% if selected_exam == e %}selected{% endif %}>{{ e }}</option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Generate</button>
+</form>
+
+<hr>
+
+{% if students_data %}
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Rank</th>
+        <th>Admission No</th>
+        <th>Name</th>
+        <th>Total</th>
+        <th>Percentage</th>
+        <th>Division</th>
+        <th>Status</th>
+    </tr>
+
+    {% for s in students_data %}
+    <tr>
+        <td>{{ s.rank }}</td>
+        <td>{{ s.student.admission_no }}</td>
+        <td>{{ s.student.user.email }}</td>
+        <td>{{ s.total }}</td>
+        <td>{{ s.percentage|floatformat:2 }}%</td>
+        <td>{{ s.division }}</td>
+        <td>{{ s.pass_fail }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endif %}
+
+{% endblock %}

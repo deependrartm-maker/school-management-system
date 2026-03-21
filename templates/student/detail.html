@@ -1,0 +1,10 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+<h2>Student Detail</h2>
+
+<p><strong>Admission No:</strong> {{ student.admission_no }}</p>
+<p><strong>Class:</strong> {{ student.class_name }}</p>
+<p><strong>Section:</strong> {{ student.section }}</p>
+<p><strong>Date of Birth:</strong> {{ student.date_of_birth }}</p>
+{% endblock %}

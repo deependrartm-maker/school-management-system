@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Consolidated Marksheet</title>
+    <style>
+        body { font-family: Arial; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border: 1px solid black; padding: 6px; text-align: center; }
+        th { background-color: #eee; }
+        .summary { margin-top: 20px; }
+        .print-btn { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+
+<h2>Yearly Consolidated Marksheet</h2>
+<h3>Class: {{ class_name }}</h3>
+
+<button class="print-btn" onclick="window.print()">Print</button>
+
+<table>
+    <tr>
+        <th>Rank</th>
+        <th>Student Name</th>
+        <th>Admission No</th>
+        <th>Total Obtained</th>
+        <th>Total Maximum</th>
+        <th>Percentage</th>
+        <th>Grade</th>
+    </tr>
+
+    {% for r in results %}
+    <tr>
+        <td>{{ r.rank }}</td>
+        <td>{{ r.student.user.email }}</td>
+        <td>{{ r.student.admission_no }}</td>
+        <td>{{ r.total_obtained }}</td>
+        <td>{{ r.total_max }}</td>
+        <td>{{ r.percentage }}%</td>
+        <td>{{ r.grade }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div class="summary">
+    <h4>Class Average: {{ class_average }}%</h4>
+
+    {% if topper %}
+    <h4>Class Topper:
+        {{ topper.student.user.email }}
+        ({{ topper.percentage }}%)
+    </h4>
+    {% endif %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% extends 'dashboard/base.html' %}  <!-- MUST be first line -->
+
+{% block title %}Parent Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h2 class="mb-4">Parent Dashboard</h2>
+
+    <!-- Child Profile -->
+    <div class="profile-snapshot">
+        <p><strong>Child Name:</strong> -</p>
+        <p><strong>Class:</strong> -</p>
+        <p><strong>Section:</strong> -</p>
+    </div>
+
+    <!-- Attendance -->
+    <div class="cards">
+        <div class="card">Attendance This Month: 0%</div>
+    </div>
+
+    <!-- Marks -->
+    <div class="charts">
+        <div class="chart">Last Exam Marks Placeholder</div>
+    </div>
+
+    <!-- Homework / Notifications -->
+    <div class="recent-activity">
+        <h4>Homework / Notifications</h4>
+        <ul>
+            <li>Pending Homework Placeholder</li>
+            <li>New Message Placeholder</li>
+        </ul>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+        <a href="#" class="btn">View Result</a>
+        <a href="#" class="btn">Download Marksheet</a>
+        <a href="#" class="btn">Contact Teacher</a>
+    </div>
+</div>
+{% endblock %}

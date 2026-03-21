@@ -1,0 +1,18 @@
+{% extends "dashboard/admin.html" %}
+
+{% block content %}
+<h2>Manual IP Block</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <label>IP Address:</label>
+    <input type="text" name="ip_address" required placeholder="e.g., 192.168.1.100"><br><br>
+
+    <label>Block Duration (minutes):</label>
+    <input type="number" name="duration" value="30" min="1"><br><br>
+
+    <button type="submit">Block IP</button>
+</form>
+
+<a href="{% url 'admin_blocked_ips' %}">Back to Blocked IP List</a>
+{% endblock %}

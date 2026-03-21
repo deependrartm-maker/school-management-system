@@ -1,0 +1,45 @@
+{% extends 'dashboard/base.html' %}  <!-- MUST be first line -->
+
+{% block title %}Student Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h2 class="mb-4">Student Dashboard</h2>
+
+    <!-- Profile -->
+    <div class="profile-snapshot">
+        <p><strong>Roll No:</strong> 0</p>
+        <p><strong>Class:</strong> 0</p>
+        <p><strong>Section:</strong> -</p>
+        <p><strong>Father:</strong> -</p>
+        <p><strong>Mother:</strong> -</p>
+        <p><strong>DOB:</strong> -</p>
+    </div>
+
+    <!-- Attendance Cards -->
+    <div class="cards">
+        <div class="card">Days Present: 0</div>
+        <div class="card">Days Absent: 0</div>
+    </div>
+
+    <!-- Marks -->
+    <div class="charts">
+        <div class="chart">Marks Overview Placeholder</div>
+    </div>
+
+    <!-- Homework / Notifications -->
+    <div class="recent-activity">
+        <h4>Homework / Notifications</h4>
+        <ul>
+            <li>Pending Homework Placeholder</li>
+            <li>New Message Placeholder</li>
+        </ul>
+    </div>
+
+    <!-- Quick Links -->
+    <div class="quick-links">
+        <a href="#" class="btn">View Result</a>
+        <a href="#" class="btn">Download Marksheet</a>
+    </div>
+</div>
+{% endblock %}
