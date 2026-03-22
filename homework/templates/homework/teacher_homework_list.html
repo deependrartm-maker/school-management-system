@@ -1,0 +1,9 @@
+<h2>Homework You Assigned</h2>
+<a href="{% url 'homework:teacher_create' %}">Create New Homework</a>
+<ul>
+{% for hw in homeworks %}
+    <li>{{ hw.title }} | {{ hw.class_name }} | {{ hw.subject }} | Due: {{ hw.due_date }}</li>
+{% empty %}
+    <li>No homework assigned yet.</li>
+{% endfor %}
+</ul>

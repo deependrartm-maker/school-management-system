@@ -25,4 +25,5 @@ urlpatterns = [
     path('', include('attendance.urls')),
     path('dashboard/admin/marks/', include('marks.urls', namespace='marks')),  # ✅ include with namespace
     path('verify/', include('verification.urls')),
+    path('homework/', include('homework.urls')),
 ]

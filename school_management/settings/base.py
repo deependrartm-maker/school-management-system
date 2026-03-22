@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'marks',
     'audit',
     'verification',
+    'homework'
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
