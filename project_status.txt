@@ -1,0 +1,44 @@
+PROJECT: School Management System (Django)
+
+GITHUB REPO:
+https://github.com/deependrartm-maker/school-management-system
+
+CURRENT STATUS:
+
+? Project GitHub pe uploaded hai
+? Local system me VS Code me run ho raha hai
+? Git setup done (push/pull working)
+? Homework module basic create ho gaya
+
+HOMEWORK MODULE STATUS:
+? Teacher can create homework
+? Teacher can view homework list
+? Student can view homework list
+? Homework submission system pending
+? File upload by student pending
+? Teacher review system pending
+
+APPS AVAILABLE:
+- accounts
+- attendance
+- audit
+- dashboard
+- marks
+- profiles
+- verification
+- homework (newly added)
+
+NEXT TASK:
+?? Homework Submission System banana hai:
+- Student file upload kare
+- Submission save ho
+- Teacher submissions dekh sake
+
+INSTRUCTION FOR CHATGPT:
+?? Direct code do with file name and exact location
+?? Existing structure ko disturb na kare
+?? Step-by-step simple explain kare
+?? Django best practice follow kare
+
+START FROM:
+?? Homework Submission System
