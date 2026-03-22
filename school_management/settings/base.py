@@ -4,6 +4,7 @@ This file contains common settings shared between development and production.
 """
 
 from pathlib import Path
+import os   # ✅ IMPORTANT (missing tha)
 
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -28,10 +29,15 @@ INSTALLED_APPS = [
     'marks',
     'audit',
     'verification',
-    'homework'
+    'homework',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+
+# =========================
+# MIDDLEWARE
+# =========================
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -45,12 +51,17 @@ MIDDLEWARE = [
     'accounts.middleware.IPBlockMiddleware',
 ]
 
+
+# =========================
+# URL / TEMPLATE
+# =========================
+
 ROOT_URLCONF = 'school_management.urls'
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'templates'],  # global templates
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -83,7 +94,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # =========================
 
 LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'UTC'   # later India ke liye 'Asia/Kolkata' kar sakte ho
 USE_I18N = True
 USE_TZ = True
 
@@ -99,6 +110,14 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
+
+
+# =========================
+# MEDIA FILES (🔥 IMPORTANT)
+# =========================
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # =========================

@@ -24,3 +24,22 @@ class Submission(models.Model):
 
     def __str__(self):
         return f"{self.student.username} - {self.homework.title}"
+    
+    from django.db import models
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
+class HomeworkSubmission(models.Model):
+    homework = models.ForeignKey('Homework', on_delete=models.CASCADE)
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    file = models.FileField(upload_to='homework_submissions/')
+    submitted_at = models.DateTimeField(auto_now_add=True)
+
+    # Teacher review
+    remarks = models.TextField(blank=True, null=True)
+    is_checked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.student} - {self.homework}"

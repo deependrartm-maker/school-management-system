@@ -1,0 +1,21 @@
+<h2>Submissions</h2>
+
+<h3>{{ homework.title }}</h3>
+
+<table border="1">
+    <tr>
+        <th>Student</th>
+        <th>File</th>
+        <th>Submitted At</th>
+    </tr>
+
+    {% for sub in submissions %}
+    <tr>
+        <td>{{ sub.student }}</td>
+        <td>
+            <a href="{{ sub.file.url }}" target="_blank">Download</a>
+        </td>
+        <td>{{ sub.submitted_at }}</td>
+    </tr>
+    {% endfor %}
+</table>
